@@ -87,8 +87,8 @@ jobs:
         shell: powershell
         working-directory: ${{ env.artifact_dir }}
         run: |
-          "installer_product_version=" + (ls ${{ env.executable_name }} | % versioninfo | % ProductVersion) >> $GITHUB_ENV
-          "installer_file_version=" + (ls ${{ env.executable_name }} | % versioninfo | % FileVersion) >> $GITHUB_ENV
+          "installer_product_version=" + (Get-Item ${{ env.executable_name }} | Select-Object -ExpandProperty VersionInfo | Select-Object -ExpandProperty ProductVersion) >> $GITHUB_ENV
+          "installer_file_version=" + (Get-Item ${{ env.executable_name }} | Select-Object -ExpandProperty VersionInfo | Select-Object -ExpandProperty FileVersion) >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v6
