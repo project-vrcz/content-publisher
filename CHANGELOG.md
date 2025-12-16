@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Windows Installer (NSIS). [`#101`](https://github.com/project-vrcz/content-manager/pull/101)
+
 ## [1.1.0] - 2025-12-11
 
 ### Changed
