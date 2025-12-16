@@ -72,6 +72,8 @@ jobs:
       installer_output_name: vrchat-content-manager-installer.exe
       artifact_dir: ${{ github.workspace }}/artifacts
       executable_name: VRChatContentManager.App.exe
+      installer_product_version: ""
+      installer_file_version: ""
 
     steps:
       - name: Download Build Artifacts
@@ -85,8 +87,8 @@ jobs:
         shell: powershell
         working-directory: ${{ env.artifact_dir }}
         run: |
-          "product-version=" + (ls ${{ env.executable_name }} | % versioninfo | % ProductVersion) >> $GITHUB_OUTPUT
-          "file-version=" + (ls ${{ env.executable_name }} | % versioninfo | % FileVersion) >> $GITHUB_OUTPUT
+          "installer_product_version=" + (ls ${{ env.executable_name }} | % versioninfo | % ProductVersion) >> $GITHUB_ENV
+          "installer_file_version=" + (ls ${{ env.executable_name }} | % versioninfo | % FileVersion) >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v6
@@ -103,8 +105,8 @@ jobs:
         shell: powershell
         working-directory: ${{ env.installer_working_dir }}
         env:
-          INSTALLER_DISPLAY_VERSION: ${{ steps.get-version-info.outputs.product-version }}
-          INSTALLER_OLD_CLASSIC_VERSION: ${{ steps.get-version-info.outputs.file-version }}
+          INSTALLER_DISPLAY_VERSION: ${{ env.installer_product_version }}
+          INSTALLER_OLD_CLASSIC_VERSION: ${{ env.installer_file_version }}
         run: makensis ${{ env.installer_script }}
 
       - name: Upload Installer Artifact
