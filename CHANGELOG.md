@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Download update in background. (optional)
 - Toggle pinned or borderless window in tray menu. [`#291`](https://github.com/project-vrcz/content-publisher/pull/291)
 - Add loading text to bootstrap screen.
+- Send desktop notification on new pairing request [`#296`](https://github.com/project-vrcz/content-publisher/issues/298)
 
 ### Changed
 
