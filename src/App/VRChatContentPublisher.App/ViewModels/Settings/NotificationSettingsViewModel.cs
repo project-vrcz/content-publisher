@@ -67,6 +67,20 @@ public sealed partial class NotificationSettingsViewModel(
         }
     }
 
+    public bool SendNotificationOnNewPairingRequest
+    {
+        get => appSettings.Value.SendNotificationOnNewPairingRequest;
+        set
+        {
+            if (appSettings.Value.SendNotificationOnNewPairingRequest == value)
+                return;
+
+            OnPropertyChanging();
+            appSettings.Update(settings => settings.SendNotificationOnNewPairingRequest = value);
+            OnPropertyChanged();
+        }
+    }
+
     [RelayCommand]
     private async Task SendTestNotification()
     {

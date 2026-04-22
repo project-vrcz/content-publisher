@@ -11,6 +11,7 @@ public sealed class AppSettings
     public bool SendNotificationOnStartupSessionRestoreFailed { get; set; } = true;
     public bool SendNotificationOnTaskFailed { get; set; } = true;
     public bool SendNotificationOnPublicIpChanged { get; set; } = true;
+    public bool SendNotificationOnNewPairingRequest { get; set; } = true;
 
     public string? AppCulture { get; set; }
 

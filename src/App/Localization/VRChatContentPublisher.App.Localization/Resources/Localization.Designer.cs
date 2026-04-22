@@ -541,6 +541,24 @@ namespace VRChatContentPublisher.App.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Pairing Request.
+        /// </summary>
+        internal static string Notifications_New_Pairing_Request_Title {
+            get {
+                return ResourceManager.GetString("Notifications_New_Pairing_Request_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is requesting to pair.
+        /// </summary>
+        internal static string Notifications_New_Pairing_Request_Body_Template {
+            get {
+                return ResourceManager.GetString("Notifications_New_Pairing_Request_Body_Template", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading....
         /// </summary>
         internal static string Pages_Bootstrap_Loading_Text {
@@ -1494,6 +1512,15 @@ namespace VRChatContentPublisher.App.Localization.Resources {
         internal static string Pages_Settings_Notification_Send_Notifications_When_Public_IP_Changed {
             get {
                 return ResourceManager.GetString("Pages_Settings_Notification_Send_Notifications_When_Public_IP_Changed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Pairing Request.
+        /// </summary>
+        internal static string Pages_Settings_Notification_Send_Notifications_When_New_Pairing_Request {
+            get {
+                return ResourceManager.GetString("Pages_Settings_Notification_Send_Notifications_When_New_Pairing_Request", resourceCulture);
             }
         }
         

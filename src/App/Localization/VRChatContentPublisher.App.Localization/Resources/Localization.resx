@@ -212,6 +212,9 @@
     <data name="Pages_Settings_Notification_Send_Notifications_When_Public_IP_Changed" xml:space="preserve">
         <value>Public IP Changed</value>
     </data>
+    <data name="Pages_Settings_Notification_Send_Notifications_When_New_Pairing_Request" xml:space="preserve">
+        <value>New Pairing Request</value>
+    </data>
     <data name="Pages_Settings_PairedClients_Title" xml:space="preserve">
         <value>Paired Clients</value>
     </data>
@@ -601,6 +604,12 @@ Please notice that you need to re-pair with the app, or you can change port back
     </data>
     <data name="Notifications_Task_Failed_Title_Template" xml:space="preserve">
         <value>Publish {0} "{1}" Failed</value>
+    </data>
+    <data name="Notifications_New_Pairing_Request_Title" xml:space="preserve">
+        <value>New Pairing Request</value>
+    </data>
+    <data name="Notifications_New_Pairing_Request_Body_Template" xml:space="preserve">
+        <value>{0} is requesting to pair</value>
     </data>
     <data name="Tray_Menu_Open_Logs_Folder" xml:space="preserve">
         <value>Open Logs Folder</value>

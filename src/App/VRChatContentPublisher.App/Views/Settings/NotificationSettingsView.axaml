@@ -29,5 +29,8 @@
         <ToggleSwitch Content="{I18N {x:Static localization:LangKeys.Pages_Settings_Notification_Send_Notifications_When_Public_IP_Changed}}"
                       IsEnabled="{Binding EnabledNotifications}"
                       IsChecked="{Binding SendNotificationOnPublicIpChanged}" />
+        <ToggleSwitch Content="{I18N {x:Static localization:LangKeys.Pages_Settings_Notification_Send_Notifications_When_New_Pairing_Request}}"
+                      IsEnabled="{Binding EnabledNotifications}"
+                      IsChecked="{Binding SendNotificationOnNewPairingRequest}" />
     </StackPanel>
 </UserControl>
