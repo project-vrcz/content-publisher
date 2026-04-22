@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="clr-namespace:VRChatContentPublisher.App.ViewModels.Pages"
+             xmlns:localization="clr-namespace:VRChatContentPublisher.App.Localization;assembly=VRChatContentPublisher.App.Localization"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="pages:BootstrapPageViewModel"
              x:Class="VRChatContentPublisher.App.Pages.BootstrapPage">
@@ -13,7 +14,11 @@
         </AttachedToVisualTreeTrigger>
     </Interaction.Behaviors>
 
-    <Grid>
-        <ProgressBar Classes="circular" IsIndeterminate="True" />
+    <Grid RowDefinitions="*,Auto,*">
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Spacing="16">
+            <ProgressBar Classes="circular" IsIndeterminate="True" HorizontalAlignment="Center" />
+            <TextBlock Text="{I18N {x:Static localization:LangKeys.Pages_Bootstrap_Loading_Text}}"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
     </Grid>
 </UserControl>

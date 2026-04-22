@@ -689,4 +689,7 @@ Please notice that you need to re-pair with the app, or you can change port back
     <data name="In_App_Notifications_New_Version_Available_Dismiss_Button_Tooltip" xml:space="preserve">
         <value>Dismiss</value>
     </data>
+    <data name="Pages_Bootstrap_Loading_Text" xml:space="preserve">
+        <value>Loading...</value>
+    </data>
 </root>

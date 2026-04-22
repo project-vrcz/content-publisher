@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Update check run on start or each 30mins in background. (optional)
   - Download update in background. (optional)
 - Toggle pinned or borderless window in tray menu. [`#291`](https://github.com/project-vrcz/content-publisher/pull/291)
+- Add loading text to bootstrap screen with multi-language support.
 
 ### Changed
 
