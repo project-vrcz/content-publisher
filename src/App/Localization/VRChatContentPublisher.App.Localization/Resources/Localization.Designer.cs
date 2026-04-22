@@ -541,6 +541,15 @@ namespace VRChatContentPublisher.App.Localization.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        internal static string Pages_Bootstrap_Loading_Text {
+            get {
+                return ResourceManager.GetString("Pages_Bootstrap_Loading_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to login.
         /// </summary>
         internal static string Pages_Add_Account_Alert_Login_Failed_Title {
