@@ -49,13 +49,19 @@ jobs:
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "10.0.x"
+          cache: true
+
+      - name: Restore
+        run: dotnet restore App/VRChatContentPublisher.App --locked-mode
+        shell: bash
+        working-directory: ${{ env.src_dir }}
 
       - name: Build
         env:
           RID: ${{ matrix.rid }}
           BUILD_OUTPUT_DIR: ${{ env.output_dir }}
           TARGET_FRAMEWORK: ${{ matrix.target-framework }}
-        run: dotnet publish -c Release App/VRChatContentPublisher.App -r $RID -o $BUILD_OUTPUT_DIR -f $TARGET_FRAMEWORK
+        run: dotnet publish -c Release App/VRChatContentPublisher.App -r $RID -o $BUILD_OUTPUT_DIR -f $TARGET_FRAMEWORK --no-restore
         shell: bash
         working-directory: ${{ env.src_dir }}
 
@@ -104,12 +110,18 @@ jobs:
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "10.0.x"
+          cache: true
+
+      - name: Restore
+        run: dotnet restore App/CrashHandler/VRChatContentPublisher.CrashHandler.App --locked-mode
+        shell: bash
+        working-directory: ${{ env.src_dir }}
 
       - name: Build
         env:
           RID: ${{ matrix.rid }}
           BUILD_OUTPUT_DIR: ${{ env.output_dir }}
-        run: dotnet publish -c Release App/CrashHandler/VRChatContentPublisher.CrashHandler.App -r $RID -o $BUILD_OUTPUT_DIR
+        run: dotnet publish -c Release App/CrashHandler/VRChatContentPublisher.CrashHandler.App -r $RID -o $BUILD_OUTPUT_DIR --no-restore
         shell: bash
         working-directory: ${{ env.src_dir }}
 
