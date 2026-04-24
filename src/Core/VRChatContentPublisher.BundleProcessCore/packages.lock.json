@@ -62,6 +62,7 @@
           "EasyCompressor.LZ4": "[2.1.0, )"
         }
       }
-    }
+    },
+    "net10.0/win-x64": {}
   }
 }

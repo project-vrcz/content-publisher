@@ -102,6 +102,13 @@
           "Microsoft.Extensions.Hosting.Abstractions": "[10.0.6, )"
         }
       }
+    },
+    "net10.0-windows10.0.17763/win-x64": {
+      "Microsoft.Win32.SystemEvents": {
+        "type": "Transitive",
+        "resolved": "10.0.6",
+        "contentHash": "+O34uwacm8jHOSsasFV8U9+kSiDPqk/v8umwYl6BIrp/fUaeqRdF/aJcIZvNZ9RhNw+TKlL8oO1HsSEE4Ej/ww=="
+      }
     }
   }
 }
