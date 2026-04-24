@@ -50,6 +50,7 @@ jobs:
         with:
           dotnet-version: "10.0.x"
           cache: true
+          cache-dependency-path: ${{ env.src_dir }}/App/VRChatContentPublisher.App/VRChatContentPublisher.App.csproj
 
       - name: Restore
         run: dotnet restore App/VRChatContentPublisher.App --locked-mode
@@ -111,6 +112,7 @@ jobs:
         with:
           dotnet-version: "10.0.x"
           cache: true
+          cache-dependency-path: ${{ env.src_dir }}/App/CrashHandler/VRChatContentPublisher.CrashHandler.App/VRChatContentPublisher.CrashHandler.App.csproj
 
       - name: Restore
         run: dotnet restore App/CrashHandler/VRChatContentPublisher.CrashHandler.App --locked-mode
