@@ -59,6 +59,8 @@ public partial class App : Application
 
         crashReportViewModel.LogsFolderPath =
             args.GetValueOrDefault("logsFolderPath", crashReportViewModel.LogsFolderPath);
+        crashReportViewModel.LogFilePath =
+            args.GetValueOrDefault("logFilePath", crashReportViewModel.LogFilePath);
         crashReportViewModel.ApplicationPath =
             args.GetValueOrDefault("applicationPath", crashReportViewModel.ApplicationPath);
 

@@ -25,6 +25,9 @@ public sealed partial class CrashReportViewModel : ViewModelBase
 
     public string LogsFolderPath { get; set; } = AppPathUtils.GetLogsPath();
 
+    public string LogFilePath { get; set; } =
+        Path.Combine(AppPathUtils.GetLogsPath(), $"log-{DateTime.Now:yyyyMMdd}.log");
+
     public string ApplicationPath = AppPathUtils.GetMainAppPath();
 
     [RelayCommand]
