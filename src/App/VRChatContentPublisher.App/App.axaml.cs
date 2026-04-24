@@ -123,7 +123,9 @@ public partial class App : Application
 
         AvaloniaXamlLoader.Load(this);
 
+#if DEBUG
         this.AttachDeveloperTools();
+#endif
         
         if (DataContext is not AppViewModel appViewModel)
             return;
