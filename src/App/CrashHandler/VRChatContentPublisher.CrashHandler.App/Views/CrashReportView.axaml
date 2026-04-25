@@ -42,13 +42,6 @@
                             </ClickEventTrigger>
                         </Interaction.Behaviors>
                     </Button>
-                    <Button Content="Open Log File">
-                        <Interaction.Behaviors>
-                            <ClickEventTrigger>
-                                <interaction:LaunchFileAction FilePath="{Binding LogFilePath}" />
-                            </ClickEventTrigger>
-                        </Interaction.Behaviors>
-                    </Button>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Orientation="Horizontal"
                             Spacing="4">

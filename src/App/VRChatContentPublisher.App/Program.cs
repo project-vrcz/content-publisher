@@ -201,8 +201,6 @@ internal sealed class Program
             Convert.ToBase64String(Encoding.UTF8.GetBytes(errorText)),
             "--logsFolderPath",
             AppStorageService.GetLogsPath(),
-            "--logFilePath",
-            Path.Combine(AppStorageService.GetLogsPath(), $"log-{DateTime.Now:yyyyMMdd}.log"),
             "--applicationPath",
             Environment.ProcessPath ?? fallbackAppPath
         ]);
