@@ -124,7 +124,7 @@ static HttpClient CreateGitHubApiClient(string? token)
 static async Task<AppUpdateInformation> BuildUpdaterMetadataAsync(HttpClient httpClient, GitHubRelease release, bool dryRun)
 {
     var winX64Asset = release.Assets.FirstOrDefault(asset =>
-        asset.Name.Contains("win-x64", StringComparison.OrdinalIgnoreCase));
+        asset.Name.EndsWith("app-win-x64.zip", StringComparison.OrdinalIgnoreCase));
 
     if (winX64Asset is null)
         throw new InvalidOperationException("No win-x64 release asset found.");
