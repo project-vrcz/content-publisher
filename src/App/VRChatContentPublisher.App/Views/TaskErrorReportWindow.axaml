@@ -31,10 +31,16 @@
                         Padding="0,0,0,8">
                     <StackPanel>
                         <TextBlock Text="Error Report" Classes="item-header" />
-                        <TextBlock Text="Task ID" Classes="item-header" />
-                        <SelectableTextBlock Text="{Binding TaskId}"/>
-                        <TextBlock Text="Attempt ID" Classes="item-header" />
-                        <SelectableTextBlock Text="{Binding AttemptId}" Classes="item-content"/>
+                        <UniformGrid Columns="2">
+                            <StackPanel>
+                                <TextBlock Text="Task ID" Classes="item-header" />
+                                <SelectableTextBlock Text="{Binding TaskId}" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Attempt ID" Classes="item-header" />
+                                <SelectableTextBlock Text="{Binding AttemptId}" Classes="item-content" />
+                            </StackPanel>
+                        </UniformGrid>
                         <SelectableTextBlock Text="{Binding ContentName}" FontSize="24" />
                     </StackPanel>
                 </Border>
