@@ -32,6 +32,7 @@
                     <StackPanel>
                         <TextBlock Text="Error Report" Classes="item-header" />
                         <SelectableTextBlock Text="{Binding TaskId}"/>
+                        <SelectableTextBlock Text="{Binding AttemptId}" Classes="item-content"/>
                         <SelectableTextBlock Text="{Binding ContentName}" FontSize="24" />
                     </StackPanel>
                 </Border>

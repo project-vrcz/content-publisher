@@ -19,6 +19,12 @@ public sealed class ContentPublishTaskState
     /// </summary>
     public string TaskId { get; set; } = string.Empty;
 
+    /// <summary>
+    /// The unique identifier of the latest publish attempt.
+    /// Null for legacy task records created before this field existed.
+    /// </summary>
+    public string? AttemptId { get; set; }
+
     #endregion
 
     #region Content Information

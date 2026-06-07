@@ -25,6 +25,7 @@ public sealed class ContentPublishTaskService
     #region Convenience Properties (delegating to State)
 
     public string TaskId => State.TaskId;
+    public string? AttemptId => State.AttemptId;
 
     public string ContentId => State.ContentId;
     public string ContentName => State.ContentName;
@@ -123,6 +124,9 @@ public sealed class ContentPublishTaskService
     private async Task StartTaskCoreAsync()
     {
         var attemptId = Guid.NewGuid().ToString("D");
+        State.AttemptId = attemptId;
+        await RequestPersistAsync();
+
         using (_logger.BeginScope(
                    "Publish task ({TaskId}) attempt ({AttemptId}) for {ContentType} {ContentName} ({ContentId}) on platform {ContentPlatform}, Raw BundleFileId: {RawBundleFileId}",
                    State.TaskId, attemptId, State.ContentType, State.ContentName, State.ContentId, State.ContentPlatform,
