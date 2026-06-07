@@ -34,7 +34,7 @@
                         <UniformGrid Columns="2">
                             <StackPanel>
                                 <TextBlock Text="Task ID" Classes="item-header" />
-                                <SelectableTextBlock Text="{Binding TaskId}" />
+                                <SelectableTextBlock Text="{Binding TaskId}" Classes="item-content" />
                             </StackPanel>
                             <StackPanel>
                                 <TextBlock Text="Attempt ID" Classes="item-header" />
