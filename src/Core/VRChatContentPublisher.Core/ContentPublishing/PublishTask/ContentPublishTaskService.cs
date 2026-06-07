@@ -122,9 +122,10 @@ public sealed class ContentPublishTaskService
 
     private async Task StartTaskCoreAsync()
     {
+        var attemptId = Guid.NewGuid().ToString("D");
         using (_logger.BeginScope(
-                   "Publish task ({TaskId}) for {ContentType} {ContentName} ({ContentId}) on platform {ContentPlatform}, Raw BundleFileId: {RawBundleFileId}",
-                   State.TaskId, State.ContentType, State.ContentName, State.ContentId, State.ContentPlatform,
+                   "Publish task ({TaskId}) attempt ({AttemptId}) for {ContentType} {ContentName} ({ContentId}) on platform {ContentPlatform}, Raw BundleFileId: {RawBundleFileId}",
+                   State.TaskId, attemptId, State.ContentType, State.ContentName, State.ContentId, State.ContentPlatform,
                    State.RawBundleFileId)
               )
         {
