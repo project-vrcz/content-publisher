@@ -6,10 +6,10 @@ namespace VRChatContentPublisher.App.ViewModels;
 
 public sealed class TaskErrorReportWindowViewModel(ContentPublishTaskService publishTaskService) : ViewModelBase
 {
-    private const string LegacyAttemptIdText = "Unknown (legacy task data)";
+    private const string UnknownAttemptIdDisplayText = "Unknown (legacy task data)";
 
     public string TaskId => publishTaskService.TaskId;
-    public string AttemptId => publishTaskService.AttemptId ?? LegacyAttemptIdText;
+    public string AttemptId => publishTaskService.AttemptId ?? UnknownAttemptIdDisplayText;
 
     public string ContentName => publishTaskService.ContentName;
     public string ContentType => publishTaskService.ContentType;

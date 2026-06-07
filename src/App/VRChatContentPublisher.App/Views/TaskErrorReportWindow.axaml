@@ -31,6 +31,7 @@
                         Padding="0,0,0,8">
                     <StackPanel>
                         <TextBlock Text="Error Report" Classes="item-header" />
+                        <TextBlock Text="Task ID" Classes="item-header" />
                         <SelectableTextBlock Text="{Binding TaskId}"/>
                         <TextBlock Text="Attempt ID" Classes="item-header" />
                         <SelectableTextBlock Text="{Binding AttemptId}" Classes="item-content"/>
