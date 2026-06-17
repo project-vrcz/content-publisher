@@ -52,13 +52,6 @@ jobs:
       output_dir: ${{ github.workspace }}/output
 
     steps:
-      - run: |
-          echo "sentry-environment=${{ env.sentry_environment }}"
-          echo "use-production-sentry-dsn=${{ inputs.use-production-sentry-dsn }}"
-          echo "SENTRY_DSN=${{ secrets.SENTRY_DSN }}"
-          echo "github.event_name=${{ github.event_name }}"
-        shell: bash
-
       - name: Checkout
         uses: actions/checkout@v6
         with:
