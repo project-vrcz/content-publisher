@@ -110,6 +110,9 @@ jobs:
       ref: releasing
       sentry-environment: ${{ case(inputs.pre-release, 'preview', 'stable') }}
       use-production-sentry-dsn: true
+    secrets:
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      SENTRY_DSN_DEBUG: ${{ secrets.SENTRY_DSN_DEBUG }}
 
   create-release:
     needs: [update-changelog, build]
