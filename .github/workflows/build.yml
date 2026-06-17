@@ -64,7 +64,7 @@ jobs:
           RID: ${{ matrix.rid }}
           BUILD_OUTPUT_DIR: ${{ env.output_dir }}
           TARGET_FRAMEWORK: ${{ matrix.target-framework }}
-          SENTRY_DSN: ${{ case(inputs.use-production-sentry-dsn == true, secrets.SENTRY_DSN, secrets.SENTRY_DSN_DEBUG) }}
+          SENTRY_DSN: ${{ case(inputs.use-production-sentry-dsn, secrets.SENTRY_DSN, secrets.SENTRY_DSN_DEBUG) }}
         run: dotnet publish -c Release App/VRChatContentPublisher.App -r $RID -o $BUILD_OUTPUT_DIR -f $TARGET_FRAMEWORK -p:SentryDsn=$SENTRY_DSN -p:SentryEnvironment=$sentry_environment
         shell: bash
         working-directory: ${{ env.src_dir }}
