@@ -10,6 +10,10 @@ on:
         type: string
         description: Environment name to use for Sentry
         default: snapshot
+      use-production-sentry-dsn:
+        type: boolean
+        description: Whether to use production Sentry DSN
+        default: false
   push:
     paths:
       - src/**
@@ -39,7 +43,7 @@ jobs:
     env:
       repo_dir: ${{ github.workspace }}/repo
       src_dir: ${{ github.workspace }}/repo/src
-      sentry_environment: ${{ case(github.event_name == 'workflow_call', inputs.sentry-environment, 'snapshot') }}
+      sentry_environment: ${{ case(inputs.sentry-environment != null && inputs.sentry-environment != '', inputs.sentry-environment, 'snapshot') }}
       output_dir: ${{ github.workspace }}/output
 
     steps:
@@ -60,7 +64,7 @@ jobs:
           RID: ${{ matrix.rid }}
           BUILD_OUTPUT_DIR: ${{ env.output_dir }}
           TARGET_FRAMEWORK: ${{ matrix.target-framework }}
-          SENTRY_DSN: ${{ case(github.event_name == 'workflow_call', secrets.SENTRY_DSN, secrets.SENTRY_DSN_DEBUG) }}
+          SENTRY_DSN: ${{ case(inputs.use-production-sentry-dsn == true, secrets.SENTRY_DSN, secrets.SENTRY_DSN_DEBUG) }}
         run: dotnet publish -c Release App/VRChatContentPublisher.App -r $RID -o $BUILD_OUTPUT_DIR -f $TARGET_FRAMEWORK -p:SentryDsn=$SENTRY_DSN -p:SentryEnvironment=$sentry_environment
         shell: bash
         working-directory: ${{ env.src_dir }}
