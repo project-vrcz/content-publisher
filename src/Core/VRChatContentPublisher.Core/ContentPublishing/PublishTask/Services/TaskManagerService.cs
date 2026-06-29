@@ -86,27 +86,32 @@ public sealed class TaskManagerService(
         task.ProgressChanged += TaskOnProgressChanged;
     }
 
-    public async ValueTask<bool> RemoveTaskAsync(string taskId)
+    public async Task RemoveTaskAsync(IEnumerable<string> taskIds)
     {
-        if (!_tasks.TryGetValue(taskId, out var task))
-            return false;
+        var tasks = taskIds.Select(taskId => _tasks.GetValueOrDefault(taskId))
+            .OfType<ContentPublishTaskService>()
+            .Where(task => task.Status switch
+            {
+                ContentPublishTaskStatus.Failed => true,
+                ContentPublishTaskStatus.Completed => true,
+                ContentPublishTaskStatus.Canceled => true,
+                ContentPublishTaskStatus.Pending => true,
+                _ => false
+            })
+            .ToArray();
 
-        if (task.Status != ContentPublishTaskStatus.Failed &&
-            task.Status != ContentPublishTaskStatus.Completed &&
-            task.Status != ContentPublishTaskStatus.Canceled &&
-            task.Status != ContentPublishTaskStatus.Pending)
-            return false;
+        if (tasks.Length <= 0) return;
 
-        await task.CleanupAsync();
+        foreach (var task in tasks)
+        {
+            await task.CleanupAsync();
+            _tasks.Remove(task.TaskId);
+            await contentPublishTaskDatabaseService.DeleteStateAsync(task.TaskId);
+        }
 
-        _tasks.Remove(taskId);
-
-        var args = new ContentPublishTaskRemovedEventArg(task);
+        var args = new ContentPublishTaskRemovedEventArg(tasks);
         TaskRemoved?.Invoke(this, args);
         taskRemovedPublisher.Publish(args);
-
-        await contentPublishTaskDatabaseService.DeleteStateAsync(taskId);
-        return true;
     }
 
     private void TaskOnProgressChanged(object? sender, PublishTaskProgressEventArg e)
@@ -125,4 +130,5 @@ public record ContentPublishTaskUpdateEventArg(
     PublishTaskProgressEventArg ProgressEventArg);
 
 public record ContentPublishTaskCreatedEventArg(ContentPublishTaskService Task);
-public record ContentPublishTaskRemovedEventArg(ContentPublishTaskService Task);
+
+public record ContentPublishTaskRemovedEventArg(ContentPublishTaskService[] Tasks);

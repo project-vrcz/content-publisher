@@ -117,70 +117,50 @@ public sealed partial class PublishTaskManagerViewModel(
     [RelayCommand]
     private async Task RemoveCompletedTasks()
     {
-        var completedTasks = Tasks
+        var completedTaskIds = Tasks
             .Where(t => t.Status is ContentPublishTaskStatus.Completed)
-            .ToArray();
-
-        foreach (var task in completedTasks)
-        {
-            await taskManagerService.RemoveTaskAsync(task.TaskId);
-        }
+            .Select(task => task.TaskId);
+        await taskManagerService.RemoveTaskAsync(completedTaskIds);
     }
 
     [RelayCommand]
     private async Task RemoveFailedTasks()
     {
-        var completedTasks = Tasks
+        var failedTaskIds = Tasks
             .Where(t => t.Status is ContentPublishTaskStatus.Failed)
-            .ToArray();
-
-        foreach (var task in completedTasks)
-        {
-            await taskManagerService.RemoveTaskAsync(task.TaskId);
-        }
+            .Select(task => task.TaskId);
+        await taskManagerService.RemoveTaskAsync(failedTaskIds);
     }
 
     [RelayCommand]
     private async Task RemoveCancelledTasks()
     {
-        var completedTasks = Tasks
+        var cancelledTaskIds = Tasks
             .Where(t => t.Status is ContentPublishTaskStatus.Canceled)
-            .ToArray();
-
-        foreach (var task in completedTasks)
-        {
-            await taskManagerService.RemoveTaskAsync(task.TaskId);
-        }
+            .Select(task => task.TaskId);
+        await taskManagerService.RemoveTaskAsync(cancelledTaskIds);
     }
 
     [RelayCommand]
     private async Task RemovePendingTasks()
     {
-        var completedTasks = Tasks
+        var pendingTaskIds = Tasks
             .Where(t => t.Status is ContentPublishTaskStatus.Pending)
-            .ToArray();
-
-        foreach (var task in completedTasks)
-        {
-            await taskManagerService.RemoveTaskAsync(task.TaskId);
-        }
+            .Select(task => task.TaskId);
+        await taskManagerService.RemoveTaskAsync(pendingTaskIds);
     }
 
     [RelayCommand]
     private async Task RemoveAllRemovableTasks()
     {
-        var completedTasks = Tasks
+        var removableTaskIds = Tasks
             .Where(t =>
                 t.Status is ContentPublishTaskStatus.Completed or
                     ContentPublishTaskStatus.Failed or
                     ContentPublishTaskStatus.Canceled or
                     ContentPublishTaskStatus.Pending)
-            .ToArray();
-
-        foreach (var task in completedTasks)
-        {
-            await taskManagerService.RemoveTaskAsync(task.TaskId);
-        }
+            .Select(task => task.TaskId);
+        await taskManagerService.RemoveTaskAsync(removableTaskIds);
     }
 
     [RelayCommand]
@@ -232,9 +212,9 @@ public sealed partial class PublishTaskManagerViewModel(
     {
         Dispatcher.UIThread.Invoke(() =>
         {
-            var viewModel = Tasks.FirstOrDefault(t => t.TaskId == e.Task.TaskId);
-            if (viewModel != null)
-                Tasks.Remove(viewModel);
+            var taskIds = e.Tasks.Select(task => task.TaskId).Distinct().ToHashSet();
+            var viewModels = Tasks.Where(viewModel => taskIds.Contains(viewModel.TaskId));
+            Tasks.RemoveAll(viewModels);
 
             NotifyTaskCountsChanged();
         });
