@@ -86,7 +86,7 @@ public sealed class TaskManagerService(
         task.ProgressChanged += TaskOnProgressChanged;
     }
 
-    public async Task RemoveTaskAsync(IEnumerable<string> taskIds)
+    public async ValueTask RemoveTaskAsync(IEnumerable<string> taskIds)
     {
         var tasks = taskIds.Select(taskId => _tasks.GetValueOrDefault(taskId))
             .OfType<ContentPublishTaskService>()
