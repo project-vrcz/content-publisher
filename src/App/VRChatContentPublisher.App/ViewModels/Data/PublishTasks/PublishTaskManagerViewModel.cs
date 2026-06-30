@@ -212,7 +212,7 @@ public sealed partial class PublishTaskManagerViewModel(
     {
         Dispatcher.UIThread.Invoke(() =>
         {
-            var taskIds = e.Tasks.Select(task => task.TaskId).Distinct().ToHashSet();
+            var taskIds = e.Tasks.Select(task => task.TaskId).ToHashSet();
             var viewModels = Tasks.Where(viewModel => taskIds.Contains(viewModel.TaskId));
             Tasks.RemoveAll(viewModels);
 
