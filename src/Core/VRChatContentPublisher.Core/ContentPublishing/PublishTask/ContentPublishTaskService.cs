@@ -259,12 +259,20 @@ public sealed class ContentPublishTaskService
                     _ => new BundleProcessOptions(State.ContentId, [])
                 };
 
-                await _bundleProcessService.ProcessBundleAsync(
-                    rawBundleStream,
-                    outputBundleFileStream,
-                    processOptions,
-                    progressReporter,
-                    cancellationToken);
+                try
+                {
+                    await _bundleProcessService.ProcessBundleAsync(
+                        rawBundleStream,
+                        outputBundleFileStream,
+                        processOptions,
+                        progressReporter,
+                        cancellationToken);
+                }
+                catch (OperationCanceledException canceledException)
+                    when (canceledException.CancellationToken == cancellationToken)
+                {
+                    throw new PublishTaskCanceledException(canceledException);
+                }
 
                 await _fileService.MarkFileReadyAsync(outputBundleFile.FileId);
                 State.BundleFileId = outputBundleFile.FileId;
