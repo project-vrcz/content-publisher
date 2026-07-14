@@ -6,7 +6,8 @@
              xmlns:controls="clr-namespace:VRChatContentPublisher.App.Controls"
              xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:localization="clr-namespace:VRChatContentPublisher.App.Localization;assembly=VRChatContentPublisher.App.Localization"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:utils="clr-namespace:VRChatContentPublisher.Core.Shared.Utils;assembly=VRChatContentPublisher.Core.Shared"
+             mc:Ignorable="d" d:DesignWidth="400"
              x:DataType="data:UserSessionViewModel"
              x:Class="VRChatContentPublisher.App.Views.Data.Settings.UserSessionView">
 
@@ -54,6 +55,11 @@
                     Theme="{StaticResource MaterialFlatButton}"
                     Content="{avalonia:MaterialIconExt Kind=AccountWrench, Size=24}" Width="32" Height="32"
                     ToolTip.Tip="{I18N {x:Static localization:LangKeys.Pages_Settings_Accounts_Account_Item_Repair_Button_Tooltip}}" />
+            <Button IsVisible="{x:Static utils:AppDebugHelper.IsDebugMode}"
+                    Command="{Binding ForceEnterInvalidStateCommand}"
+                    Theme="{StaticResource MaterialFlatButton}"
+                    Content="{avalonia:MaterialIconExt Kind=Nuke, Size=24}" Width="32" Height="32"
+                    ToolTip.Tip="Force session invalid state" />
             <Button Command="{Binding RemoveCommand}"
                     Theme="{StaticResource MaterialFlatButton}"
                     IsEnabled="{Binding CanRemove}"

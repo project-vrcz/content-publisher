@@ -111,6 +111,12 @@ public sealed partial class UserSessionViewModel(
         navigationService.Navigate(fixPageViewModel);
     }
 
+    [RelayCommand]
+    private void ForceEnterInvalidState()
+    {
+        userSessionService.DebugForceEnterInvalidState();
+    }
+
     private async void OnUserSessionStateChanged(object? sender, UserSessionState e)
     {
         await LoadCore();
