@@ -196,6 +196,11 @@ public sealed class UserSessionService : IAsyncDisposable, IDisposable
         }
     }
 
+    public void DebugForceEnterInvalidState()
+    {
+        OnStateChanged(UserSessionState.InvalidSession);
+    }
+
     private ValueTask<AsyncServiceScope> CreateSessionScopeAsyncCore()
     {
         var scope = _scopeFactory.CreateAsyncScope();
