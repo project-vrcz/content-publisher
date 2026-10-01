@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [2.12.2] - 2026-10-01
+
 ### Changed
 
 - Cancel update no longer require confirm. [`#539`](https://github.com/project-vrcz/content-publisher/pull/539)
@@ -1204,7 +1206,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Increase retry delay
   - Increase MaxConnectionsPerServer to 256 from 10 for AWS S3 HttpClient
 
-[unreleased]: https://github.com/project-vrcz/content-publisher/compare/v2.12.1...HEAD
+[unreleased]: https://github.com/project-vrcz/content-publisher/compare/v2.12.2...HEAD
+[2.12.2]: https://github.com/project-vrcz/content-publisher/compare/v2.12.1...v2.12.2
 [2.12.1]: https://github.com/project-vrcz/content-publisher/compare/v2.12.0...v2.12.1
 [2.12.0]: https://github.com/project-vrcz/content-publisher/compare/v2.11.0...v2.12.0
 [2.11.0]: https://github.com/project-vrcz/content-publisher/compare/v2.10.1...v2.11.0
