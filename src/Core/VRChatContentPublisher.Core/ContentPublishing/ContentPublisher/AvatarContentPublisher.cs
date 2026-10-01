@@ -6,6 +6,7 @@ using Polly.Retry;
 using VRChatContentPublisher.ConnectCore.Services;
 using VRChatContentPublisher.Core.ContentPublishing.ContentPublisher.Options;
 using VRChatContentPublisher.Core.ContentPublishing.PublishTask;
+using VRChatContentPublisher.Core.ContentPublishing.PublishTask.Exceptions;
 using VRChatContentPublisher.Core.Events.UserSession;
 using VRChatContentPublisher.Core.Extensions;
 using VRChatContentPublisher.Core.Resilience;
@@ -64,26 +65,54 @@ public sealed class AvatarContentPublisher(
         PublishStageProgressReporter progressReporter,
         CancellationToken cancellationToken = default)
     {
-        using var activity = CoreActivitySources.ContentPublishing
-            .StartActivity("AvatarContentPublisher.PublishAsync")?
-            .SetContentMetadata(
-                options.AvatarId,
-                GetContentName(),
-                GetContentType(),
-                GetContentPlatform(),
-                options.UnityVersion);
+        using (CoreActivitySources.ContentPublishing
+                   .StartActivity("AvatarContentPublisher.PublishAsync")?
+                   .SetContentMetadata(
+                       options.AvatarId,
+                       GetContentName(),
+                       GetContentType(),
+                       GetContentPlatform(),
+                       options.UnityVersion))
+        {
+            using var sessionValidScope = new EnsureSessionValidScope(
+                userSessionService.UserNameOrEmail,
+                sessionStateChangedSubscriber,
+                cancellationToken
+            );
 
-        #region Initialzation (Get rpc file stream, ensure session is valid, check CancellationToken)
+            try
+            {
+                await PublishAsyncCore(
+                    bundleFileId,
+                    thumbnailFileId,
+                    description,
+                    tags,
+                    releaseStatus,
+                    progressReporter,
+                    sessionValidScope.CancellationToken);
+            }
+            catch (OperationCanceledException canceledException) when (
+                canceledException.CancellationToken == sessionValidScope.CancellationToken)
+            {
+                if (!cancellationToken.IsCancellationRequested)
+                    throw new PublishingCanceledDueToSessionInvalidException(canceledException);
+
+                throw new PublishingCanceledException(canceledException);
+            }
+        }
+    }
+
+    private async ValueTask PublishAsyncCore(string bundleFileId,
+        string? thumbnailFileId,
+        string? description,
+        string[]? tags,
+        string? releaseStatus,
+        PublishStageProgressReporter progressReporter,
+        CancellationToken cancellationToken = default)
+    {
+        #region Initialzation (Get rpc file stream, check CancellationToken)
 
         cancellationToken.ThrowIfCancellationRequested();
-
-        using var sessionValidScope = new EnsureSessionValidScope(
-            userSessionService.UserNameOrEmail,
-            sessionStateChangedSubscriber,
-            cancellationToken
-        );
-
-        cancellationToken = sessionValidScope.CancellationToken;
 
         var (bundleFileStream, thumbnailFile) = await fileService.GetRpcFileStream(bundleFileId, thumbnailFileId);
         await using var stream = bundleFileStream;
