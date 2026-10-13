@@ -592,7 +592,7 @@ Please try using VRChat SDK to publish content, if fail, contact VRChat Support,
         <value>No tasks exist for this account</value>
     </data> 
     <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_At_Template" xml:space="preserve">
-        <value>Created at {0}</value>
+        <value>Created {0}</value>
     </data>
     <data name="Pages_Tasks_Account_Tab_Task_Item_Debug_Button_Tooltip" xml:space="preserve">
         <value>Debug</value>
