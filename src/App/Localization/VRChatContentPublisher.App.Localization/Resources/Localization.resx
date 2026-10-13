@@ -594,6 +594,27 @@ Please try using VRChat SDK to publish content, if fail, contact VRChat Support,
     <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_At_Template" xml:space="preserve">
         <value>Created {0}</value>
     </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Just_Now" xml:space="preserve">
+        <value>just now</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Minute_Ago_Template" xml:space="preserve">
+        <value>{0} minute ago</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Minutes_Ago_Template" xml:space="preserve">
+        <value>{0} minutes ago</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Hour_Ago_Template" xml:space="preserve">
+        <value>{0} hour ago</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Hours_Ago_Template" xml:space="preserve">
+        <value>{0} hours ago</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Day_Ago_Template" xml:space="preserve">
+        <value>{0} day ago</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Days_Ago_Template" xml:space="preserve">
+        <value>{0} days ago</value>
+    </data>
     <data name="Pages_Tasks_Account_Tab_Task_Item_Debug_Button_Tooltip" xml:space="preserve">
         <value>Debug</value>
     </data>
