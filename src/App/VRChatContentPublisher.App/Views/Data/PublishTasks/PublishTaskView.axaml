@@ -30,7 +30,7 @@
                         <TextBlock.Text>
                             <I18N
                                 Key="{x:Static localization:LangKeys.Pages_Tasks_Account_Tab_Task_Item_Task_Created_At_Template}">
-                                <Binding Path="CreatedTime" StringFormat="T" />
+                                <Binding Path="CreatedTimeRelative" />
                             </I18N>
                         </TextBlock.Text>
                     </TextBlock>
