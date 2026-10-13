@@ -2,6 +2,7 @@ using Antelcat.I18N.Avalonia;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using MessagePipe;
+using VRChatContentPublisher.App.Localization;
 using VRChatContentPublisher.App.Views;
 using VRChatContentPublisher.Core.ContentPublishing.PublishTask;
 using VRChatContentPublisher.Core.ContentPublishing.PublishTask.Models;
@@ -16,21 +17,6 @@ public sealed partial class PublishTaskViewModel(
     ISubscriber<SessionStateChangedEvent> sessionStateChangedSubscriber
 ) : ViewModelBase
 {
-    private const string CreatedRelativeJustNowKey =
-        "Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Just_Now";
-    private const string CreatedRelativeMinuteAgoTemplateKey =
-        "Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Minute_Ago_Template";
-    private const string CreatedRelativeMinutesAgoTemplateKey =
-        "Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Minutes_Ago_Template";
-    private const string CreatedRelativeHourAgoTemplateKey =
-        "Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Hour_Ago_Template";
-    private const string CreatedRelativeHoursAgoTemplateKey =
-        "Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Hours_Ago_Template";
-    private const string CreatedRelativeDayAgoTemplateKey =
-        "Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Day_Ago_Template";
-    private const string CreatedRelativeDaysAgoTemplateKey =
-        "Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Days_Ago_Template";
-
     public string TaskId => publishTaskService.TaskId;
 
     public string ContentId => publishTaskService.ContentId;
@@ -134,12 +120,14 @@ public sealed partial class PublishTaskViewModel(
             elapsed = TimeSpan.Zero;
 
         if (elapsed < TimeSpan.FromMinutes(1))
-            return I18NExtension.Translate(CreatedRelativeJustNowKey) ?? "just now";
+            return I18NExtension.Translate(LangKeys.Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Just_Now) ?? "just now";
 
         if (elapsed < TimeSpan.FromHours(1))
         {
             var minutes = (int)Math.Floor(elapsed.TotalMinutes);
-            var key = minutes == 1 ? CreatedRelativeMinuteAgoTemplateKey : CreatedRelativeMinutesAgoTemplateKey;
+            var key = minutes == 1
+                ? LangKeys.Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Minute_Ago_Template
+                : LangKeys.Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Minutes_Ago_Template;
             return string.Format(
                 I18NExtension.Translate(key) ?? "{0} minute(s) ago",
                 minutes
@@ -149,7 +137,9 @@ public sealed partial class PublishTaskViewModel(
         if (elapsed < TimeSpan.FromDays(1))
         {
             var hours = (int)Math.Floor(elapsed.TotalHours);
-            var key = hours == 1 ? CreatedRelativeHourAgoTemplateKey : CreatedRelativeHoursAgoTemplateKey;
+            var key = hours == 1
+                ? LangKeys.Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Hour_Ago_Template
+                : LangKeys.Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Hours_Ago_Template;
             return string.Format(
                 I18NExtension.Translate(key) ?? "{0} hour(s) ago",
                 hours
@@ -157,7 +147,9 @@ public sealed partial class PublishTaskViewModel(
         }
 
         var days = (int)Math.Floor(elapsed.TotalDays);
-        var dayKey = days == 1 ? CreatedRelativeDayAgoTemplateKey : CreatedRelativeDaysAgoTemplateKey;
+        var dayKey = days == 1
+            ? LangKeys.Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Day_Ago_Template
+            : LangKeys.Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Days_Ago_Template;
         return string.Format(
             I18NExtension.Translate(dayKey) ?? "{0} day(s) ago",
             days
