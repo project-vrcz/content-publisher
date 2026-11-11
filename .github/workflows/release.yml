@@ -59,7 +59,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: "10.0.x"
+          dotnet-version: "11.0.x"
 
       - name: Update Version in .csproj
         uses: vers-one/dotnet-project-version-updater@cba3f00eab99017c431b3817a9d71b3a489cff30
