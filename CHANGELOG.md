@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Upgrade to .NET 11. [`#553`](https://github.com/project-vrcz/content-publisher/pull/553)
+  - Minor performance improvement.
+  - Cleaner async stacktrace.
+
 ## [2.12.2] - 2026-10-01
 
 ### Changed

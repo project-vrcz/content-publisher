@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
     <PropertyGroup>
-        <!--Rider won't show multi-target selector when set target framework in here-->
+        <TargetFrameworkPrefix>net11.0</TargetFrameworkPrefix>
+        <TargetFrameworkWindows>$(TargetFrameworkPrefix)-windows10.0.17763.0</TargetFrameworkWindows>
+
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsAotCompatible>true</IsAotCompatible>
