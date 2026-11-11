@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net11.0</TargetFramework>
+        <TargetFramework>$(TargetFrameworkPrefix)</TargetFramework>
         <Version>2.12.2</Version>
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     </PropertyGroup>

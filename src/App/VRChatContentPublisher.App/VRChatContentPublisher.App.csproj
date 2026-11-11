@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks>net11.0;net11.0-windows10.0.17763.0</TargetFrameworks>
+        <TargetFrameworks>$(TargetFrameworkPrefix);$(TargetFrameworkWindows)</TargetFrameworks>
         <OutputType>WinExe</OutputType>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -78,11 +78,11 @@
         <ProjectReference Include="..\Localization\VRChatContentPublisher.App.Localization\VRChatContentPublisher.App.Localization.csproj" />
     </ItemGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net11.0'">
+    <ItemGroup Condition="'$(TargetFramework)' == $(TargetFrameworkPrefix)">
         <ProjectReference Include="..\..\Core\Platform\VRChatContentPublisher.Platform.Noop\VRChatContentPublisher.Platform.Noop.csproj"/>
     </ItemGroup>
 
-    <ItemGroup Condition="'$(TargetFramework)' == 'net11.0-windows10.0.17763.0'">
+    <ItemGroup Condition="'$(TargetFramework)' == $(TargetFrameworkWindows)">
         <ProjectReference Include="..\..\Core\Platform\VRChatContentPublisher.Platform.Windows\VRChatContentPublisher.Platform.Windows.csproj"/>
     </ItemGroup>
 
