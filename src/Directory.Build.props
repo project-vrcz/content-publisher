@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
     <PropertyGroup>
-        <TargetFrameworkPrefix>.net11.0</TargetFrameworkPrefix>
+        <TargetFrameworkPrefix>net11.0</TargetFrameworkPrefix>
         <TargetFrameworkWindows>$(TargetFrameworkPrefix)-windows10.0.17763.0</TargetFrameworkWindows>
 
         <ImplicitUsings>enable</ImplicitUsings>
