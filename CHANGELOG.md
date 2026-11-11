@@ -12,6 +12,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Minor performance improvement.
   - Cleaner async stacktrace.
 
+## [2.13.0-beta.1] - 2026-11-11
+
+### Changed
+
+- Upgrade to .NET 11. [`#553`](https://github.com/project-vrcz/content-publisher/pull/553)
+  - Minor performance improvement.
+  - Cleaner async stacktrace.
+
 ## [2.12.2] - 2026-10-01
 
 ### Changed
@@ -1212,7 +1220,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Increase retry delay
   - Increase MaxConnectionsPerServer to 256 from 10 for AWS S3 HttpClient
 
-[unreleased]: https://github.com/project-vrcz/content-publisher/compare/v2.12.2...HEAD
+[unreleased]: https://github.com/project-vrcz/content-publisher/compare/v2.13.0-beta.1...HEAD
+[2.13.0-beta.1]: https://github.com/project-vrcz/content-publisher/compare/v2.12.2...v2.13.0-beta.1
 [2.12.2]: https://github.com/project-vrcz/content-publisher/compare/v2.12.1...v2.12.2
 [2.12.1]: https://github.com/project-vrcz/content-publisher/compare/v2.12.0...v2.12.1
 [2.12.0]: https://github.com/project-vrcz/content-publisher/compare/v2.11.0...v2.12.0
