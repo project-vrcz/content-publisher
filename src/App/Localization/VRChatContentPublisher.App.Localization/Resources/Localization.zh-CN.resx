@@ -586,6 +586,27 @@ VRChat Content Publisher 不会阻止你尝试使用这个账号发布内容，�
     <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_At_Template" xml:space="preserve">
         <value>任务创建于 {0}</value>
     </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Just_Now" xml:space="preserve">
+        <value>刚刚</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Minute_Ago_Template" xml:space="preserve">
+        <value>{0} 分钟前</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Minutes_Ago_Template" xml:space="preserve">
+        <value>{0} 分钟前</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Hour_Ago_Template" xml:space="preserve">
+        <value>{0} 小时前</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Hours_Ago_Template" xml:space="preserve">
+        <value>{0} 小时前</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Day_Ago_Template" xml:space="preserve">
+        <value>{0} 天前</value>
+    </data>
+    <data name="Pages_Tasks_Account_Tab_Task_Item_Task_Created_Relative_Days_Ago_Template" xml:space="preserve">
+        <value>{0} 天前</value>
+    </data>
     <data name="Pages_Tasks_Account_Tab_Task_Item_Debug_Button_Tooltip" xml:space="preserve">
         <value>调试</value>
     </data>
