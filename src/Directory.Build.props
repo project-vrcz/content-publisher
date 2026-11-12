@@ -12,6 +12,10 @@
         <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <Features>runtime-async=on</Features>
+    </PropertyGroup>
+
     <ItemGroup>
         <RuntimeHostConfigurationOption Include="System.Text.Json.Serialization.RespectNullableAnnotationsDefault" Value="true"/>
         <RuntimeHostConfigurationOption Include="System.Text.Json.Serialization.RespectRequiredConstructorParametersDefault" Value="true"/>
