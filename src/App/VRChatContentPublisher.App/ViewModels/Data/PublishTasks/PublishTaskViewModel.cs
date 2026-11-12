@@ -36,6 +36,7 @@ public sealed partial class PublishTaskViewModel(
     public ContentPublishTaskStatus Status => publishTaskService.Status;
 
     private IDisposable? eventSubscription;
+    // TODO: move to custom controls
     private readonly DispatcherTimer createdTimeUpdateTimer =
         new(TimeSpan.FromMinutes(1), DispatcherPriority.Background, Dispatcher.UIThread);
 
