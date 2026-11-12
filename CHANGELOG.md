@@ -16,6 +16,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - I18N stop working at all. [`#556`](https://github.com/project-vrcz/content-publisher/pull/556)
 
+## [2.13.0-beta.2] - 2026-11-12
+
+### Changed
+
+- Upgrade to .NET 11. [`#553`](https://github.com/project-vrcz/content-publisher/pull/553) [`#557`](https://github.com/project-vrcz/content-publisher/pull/557)
+  - Minor performance improvement.
+  - Cleaner async stacktrace.
+
+### Changes from [2.13.0-beta.1]
+
+- I18N stop working at all. [`#556`](https://github.com/project-vrcz/content-publisher/pull/556)
+
 ## [2.13.0-beta.1] - 2026-11-11
 
 ### Changed
@@ -1224,7 +1236,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Increase retry delay
   - Increase MaxConnectionsPerServer to 256 from 10 for AWS S3 HttpClient
 
-[unreleased]: https://github.com/project-vrcz/content-publisher/compare/v2.13.0-beta.1...HEAD
+[unreleased]: https://github.com/project-vrcz/content-publisher/compare/v2.13.0-beta.2...HEAD
+[2.13.0-beta.2]: https://github.com/project-vrcz/content-publisher/compare/v2.13.0-beta.1...v2.13.0-beta.2
 [2.13.0-beta.1]: https://github.com/project-vrcz/content-publisher/compare/v2.12.2...v2.13.0-beta.1
 [2.12.2]: https://github.com/project-vrcz/content-publisher/compare/v2.12.1...v2.12.2
 [2.12.1]: https://github.com/project-vrcz/content-publisher/compare/v2.12.0...v2.12.1
