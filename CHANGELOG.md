@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
-- Upgrade to .NET 11. [`#553`](https://github.com/project-vrcz/content-publisher/pull/553)
+- Upgrade to .NET 11. [`#553`](https://github.com/project-vrcz/content-publisher/pull/553) [`#557`](https://github.com/project-vrcz/content-publisher/pull/557)
   - Minor performance improvement.
   - Cleaner async stacktrace.
 
