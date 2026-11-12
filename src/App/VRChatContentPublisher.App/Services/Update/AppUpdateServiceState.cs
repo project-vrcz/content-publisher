@@ -2,11 +2,18 @@
 
 namespace VRChatContentPublisher.App.Services.Update;
 
-public abstract class AppUpdateServiceState
+public union AppUpdateServiceState(
+    AppUpdateServiceState.Idle,
+    AppUpdateServiceState.Downloading,
+    AppUpdateServiceState.DownloadError,
+    AppUpdateServiceState.IntegrityCheckFailed,
+    AppUpdateServiceState.WaitingForInstall,
+    AppUpdateServiceState.InstallError
+)
 {
-    public sealed class Idle : AppUpdateServiceState;
+    public sealed class Idle;
 
-    public sealed class Downloading : AppUpdateServiceState
+    public sealed class Downloading
     {
         public required AppUpdateInformation UpdateInformation { get; init; }
         public required string PathToDownloadedFile { get; init; }
@@ -18,13 +25,13 @@ public abstract class AppUpdateServiceState
         public required CancellationTokenSource DownloadCancellationTokenSource { get; init; }
     }
 
-    public sealed class DownloadError : AppUpdateServiceState
+    public sealed class DownloadError
     {
         public required AppUpdateInformation UpdateInformation { get; init; }
         public required Exception DownloadErrorException { get; init; }
     }
 
-    public sealed class IntegrityCheckFailed : AppUpdateServiceState
+    public sealed class IntegrityCheckFailed
     {
         public required AppUpdateInformation UpdateInformation { get; init; }
 
@@ -32,14 +39,14 @@ public abstract class AppUpdateServiceState
         public required string ExceptedFileSha256 { get; init; }
     }
 
-    public sealed class WaitingForInstall : AppUpdateServiceState
+    public sealed class WaitingForInstall
     {
         public required AppUpdateInformation UpdateInformation { get; init; }
 
         public required string PathToDownloadedFile { get; init; }
     }
 
-    public sealed class InstallError : AppUpdateServiceState
+    public sealed class InstallError
     {
         public required AppUpdateInformation UpdateInformation { get; init; }
 

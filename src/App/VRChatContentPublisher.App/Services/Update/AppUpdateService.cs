@@ -30,7 +30,7 @@ public sealed class AppUpdateService(
         AppUpdateServiceState.IntegrityCheckFailed integrityCheckFailed => integrityCheckFailed.UpdateInformation,
         AppUpdateServiceState.WaitingForInstall waitingForInstall => waitingForInstall.UpdateInformation,
         AppUpdateServiceState.InstallError installError => installError.UpdateInformation,
-        _ => null
+        AppUpdateServiceState.Idle => null
     };
 
     public Exception? LastException => UpdateState switch
@@ -62,12 +62,14 @@ public sealed class AppUpdateService(
 
         var downloadCts = new CancellationTokenSource();
         var pathToDownloadFile = Path.Combine(AppStorageService.GetTempPath(), "update", "package");
-        var downloadStateInfo = OnOnUpdateStateChanged(new AppUpdateServiceState.Downloading
+        var downloadStateInfo = new AppUpdateServiceState.Downloading
         {
             UpdateInformation = updateInformation,
             DownloadCancellationTokenSource = downloadCts,
             PathToDownloadedFile = pathToDownloadFile
-        });
+        };
+
+        OnOnUpdateStateChanged(downloadStateInfo);
 
         var cancellationToken = downloadCts.Token;
 
@@ -293,7 +295,7 @@ public sealed class AppUpdateService(
         }
     }
 
-    private T OnOnUpdateStateChanged<T>(T e) where T : AppUpdateServiceState
+    private void OnOnUpdateStateChanged(AppUpdateServiceState e)
     {
         lock (_updateStateLock)
         {
@@ -301,7 +303,6 @@ public sealed class AppUpdateService(
         }
 
         OnUpdateStateChanged?.Invoke(this, e);
-        return e;
     }
 }
 
