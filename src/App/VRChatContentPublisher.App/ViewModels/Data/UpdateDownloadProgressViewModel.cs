@@ -21,7 +21,7 @@ public sealed partial class UpdateDownloadProgressViewModel(
     [ObservableProperty] public partial bool ShowWhatNewsButton { get; set; } = true;
 
     private AppUpdateServiceState.Downloading? DownloadingState =>
-        appUpdateService.UpdateState as AppUpdateServiceState.Downloading;
+        appUpdateService.UpdateState.Value as AppUpdateServiceState.Downloading;
 
     public long TotalFileSize => DownloadingState?.TotalFileSize ?? 1;
     public long DownloadedFileSize => DownloadingState?.DownloadedFileSize ?? 0;
