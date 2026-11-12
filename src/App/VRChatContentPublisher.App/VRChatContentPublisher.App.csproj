@@ -100,4 +100,12 @@
     </ItemGroup>
 
     <Import Project="../../BuildInfo.targets"/>
+
+    <!-- Fix I18N stop working after .NET 11: https://github.com/project-vrcz/content-publisher/issues/555 -->
+    <Target Name="Include Project Satellite Assemblies In Native Compile" AfterTargets="_ComputeIlcCompileInputs">
+        <ItemGroup>
+            <IlcSatelliteAssembly Include="@(ReferenceSatellitePaths)" Exclude="@(IlcSatelliteAssembly)"/>
+        </ItemGroup>
+    </Target>
+
 </Project>
