@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Minor performance improvement.
   - Cleaner async stacktrace.
 
+### Added
+
+- Show task creation time as relative time. [`#551`](https://github.com/project-vrcz/content-publisher/pull/551)
+
 ### Changes from [2.13.0-beta.1]
 
 - I18N stop working at all. [`#556`](https://github.com/project-vrcz/content-publisher/pull/556)
