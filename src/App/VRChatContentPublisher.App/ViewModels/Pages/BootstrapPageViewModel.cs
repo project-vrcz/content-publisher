@@ -45,34 +45,7 @@ public sealed partial class BootstrapPageViewModel(
         }
 
         LoadingText = LangKeys.Pages_Bootstrap_Loading_Text_Logging_In_Accounts;
-        await sessionManagerService.RestoreSessionsAsync(
-            session =>
-            {
-                if (session.State == UserSessionState.InvalidSession)
-                {
-                    _ = desktopNotificationService.SendNotificationAsync(
-                        string.Format(
-                            I18NExtension.Translate(LangKeys.Notifications_Session_Expired_Or_Invalid_Title_Template) ??
-                            "Session expired or invalid for user {0}",
-                            session.CurrentUser?.DisplayName ?? session.UserId ?? session.UserNameOrEmail
-                        )
-                    ).AsTask();
-                }
-            },
-            (session, ex) =>
-            {
-                if (!appSettings.Value.SendNotificationOnStartupSessionRestoreFailed)
-                    return;
-
-                _ = desktopNotificationService.SendNotificationAsync(
-                    string.Format(
-                        I18NExtension.Translate(LangKeys.Notifications_Session_Restore_Failed_Title_Template) ??
-                        "Failed to restore session for user {0}",
-                        session.CurrentUser?.DisplayName ?? session.UserId ?? session.UserNameOrEmail
-                    ),
-                    ex.Message
-                ).AsTask();
-            });
+        await sessionManagerService.RestoreSessionsAsync();
 
         LoadingText = LangKeys.Pages_Bootstrap_Loading_Text_Restoring_Publish_Tasks;
         // Restore persisted publish tasks now that user sessions are available.

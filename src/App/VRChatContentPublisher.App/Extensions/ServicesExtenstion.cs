@@ -53,6 +53,7 @@ public static class ServicesExtenstion
         services.AddHostedService<TaskSuccessNotificationSenderService>();
         services.AddHostedService<PublicIpChangedNotificationSenderService>();
         services.AddHostedService<AppUpdateNotificationSender>();
+        services.AddHostedService<SessionInvalidNotificationSender>();
 
         // Dialog
         services.AddSingleton<DialogService>();

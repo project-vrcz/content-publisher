@@ -8,7 +8,7 @@ public sealed class AppSettings
     public bool UseRgbCyclingBackgroundMenu { get; set; } = false;
 
     public bool NotificationsEnabled { get; set; } = true;
-    public bool SendNotificationOnStartupSessionRestoreFailed { get; set; } = true;
+    public bool SendNotificationOnSessionInvalid { get; set; } = true;
     public bool SendNotificationOnTaskFailed { get; set; } = true;
     public bool SendNotificationOnTaskSucceeded { get; set; } = false;
     public bool EnablePublicIpMonitor { get; set; } = true;

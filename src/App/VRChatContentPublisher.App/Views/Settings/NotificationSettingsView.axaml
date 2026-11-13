@@ -57,9 +57,9 @@
             Text="{I18N {x:Static localization:LangKeys.Pages_Settings_Notification_Send_Notifications_When_Title}}"
             FontWeight="SemiBold" />
         <ToggleSwitch
-            Content="{I18N {x:Static localization:LangKeys.Pages_Settings_Notification_Send_Notifications_When_Account_Session_Expired_On_Startup}}"
+            Content="{I18N {x:Static localization:LangKeys.Pages_Settings_Notification_Send_Notifications_When_Session_Invalid}}"
             IsEnabled="{Binding EnabledNotifications}"
-            IsChecked="{Binding SendNotificationOnStartupSessionRestoreFailed}" />
+            IsChecked="{Binding SendNotificationOnSessionInvalid}" />
         <ToggleSwitch
             Content="{I18N {x:Static localization:LangKeys.Pages_Settings_Notification_Send_Notifications_When_Publish_Task_Failed}}"
             IsEnabled="{Binding EnabledNotifications}"
