@@ -176,7 +176,7 @@ public sealed class ContentPublishTaskService
                 if (State.CurrentStage == PublishTaskStage.ContentPublishing)
                 {
                     if (!_contentPublisher.CanPublish())
-                        throw new InvalidOperationException("Account session expired or invalid.");
+                        throw new PublishingCanceledDueToSessionInvalidException(null);
 
                     using (CoreActivitySources.ContentPublishing.StartActivity("ContentPublishing")?
                                .SetContentMetadata(
@@ -200,10 +200,20 @@ public sealed class ContentPublishTaskService
                 UpdateProgress("Content Published", 1, ContentPublishTaskStatus.Completed);
                 LastError = null;
             }
+            catch (PublishingCanceledDueToSessionInvalidException ex)
+            {
+                _logger.LogWarning(
+                    ex, "Publish task for content {ContentId} was cancelled due to session invalid", State.ContentId);
+                activity?.AddEvent(new ActivityEvent("TaskCancelledDueToSessionInvalid"));
+
+                LastError = ex;
+                State.ErrorMessage = ex.Message;
+                UpdateProgress("Task was cancelled due to session invalid.", 1, ContentPublishTaskStatus.Canceled);
+            }
             catch (PublishTaskCanceledException canceledException)
             {
                 _logger.LogInformation(
-                    canceledException, "Publish task for content {ContentId} was cancelled.", State.ContentId);
+                    canceledException, "Publish task for content {ContentId} was cancelled", State.ContentId);
                 activity?.AddEvent(new ActivityEvent("TaskCancelled"));
 
                 LastError = canceledException;
