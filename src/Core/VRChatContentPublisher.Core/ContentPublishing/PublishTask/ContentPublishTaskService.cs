@@ -271,7 +271,9 @@ public sealed class ContentPublishTaskService
                 catch (OperationCanceledException canceledException)
                     when (canceledException.CancellationToken == cancellationToken)
                 {
-                    throw new PublishTaskCanceledException(canceledException);
+                    throw new PublishTaskCanceledException(
+                        new BundleProcessingCanceledException(canceledException)
+                    );
                 }
 
                 await _fileService.MarkFileReadyAsync(outputBundleFile.FileId);
