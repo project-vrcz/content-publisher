@@ -12,6 +12,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Minor performance improvement.
   - Cleaner async stacktrace.
 - Task canceled due to session invalid will no longer be mark as error. [`#506`](https://github.com/project-vrcz/content-publisher/pull/506)
+- Old Send desktop notification when "account session expired on startup" was replaced by "account session expired" [`#563`](https://github.com/project-vrcz/content-publisher/pull/563)
+  - Which will send desktop notification if session expired happened after app startup.
+  - Old "account session expired on startup" settings will be reset to default. (default on)
 
 ### Added
 
