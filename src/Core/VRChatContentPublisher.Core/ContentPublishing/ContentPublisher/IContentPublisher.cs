@@ -1,4 +1,5 @@
 ﻿using VRChatContentPublisher.Core.ContentPublishing.PublishTask;
+using VRChatContentPublisher.Core.ContentPublishing.PublishTask.Exceptions;
 
 namespace VRChatContentPublisher.Core.ContentPublishing.ContentPublisher;
 
@@ -18,6 +19,11 @@ public interface IContentPublisher
         CancellationToken cancellationToken = default
     );
 
+    /// <summary>
+    /// Publish content
+    /// </summary>
+    /// <exception cref="PublishingCanceledDueToSessionInvalidException">Publishing was canceled due to session invalid</exception>
+    /// <exception cref="PublishingCanceledException">Publishing was canceled</exception>
     ValueTask PublishAsync(
         string bundleFileId,
         string? thumbnailFileId,

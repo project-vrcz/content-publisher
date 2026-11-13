@@ -11,10 +11,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Upgrade to .NET 11. [`#553`](https://github.com/project-vrcz/content-publisher/pull/553) [`#557`](https://github.com/project-vrcz/content-publisher/pull/557)
   - Minor performance improvement.
   - Cleaner async stacktrace.
+- Task canceled due to session invalid will no longer be mark as error. [`#506`](https://github.com/project-vrcz/content-publisher/pull/506)
 
 ### Added
 
 - Show task creation time as relative time. [`#551`](https://github.com/project-vrcz/content-publisher/pull/551)
+
+### Fixed
+
+- In some cases, try cancel publish task may mark task as error.
 
 ### Changes from [2.13.0-beta.1]
 

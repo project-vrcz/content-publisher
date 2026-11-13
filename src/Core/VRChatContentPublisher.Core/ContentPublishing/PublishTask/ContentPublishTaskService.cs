@@ -7,6 +7,7 @@ using VRChatContentPublisher.BundleProcessCore.Services;
 using VRChatContentPublisher.ConnectCore.Exceptions;
 using VRChatContentPublisher.ConnectCore.Services;
 using VRChatContentPublisher.Core.ContentPublishing.ContentPublisher;
+using VRChatContentPublisher.Core.ContentPublishing.PublishTask.Exceptions;
 using VRChatContentPublisher.Core.ContentPublishing.PublishTask.Models;
 using VRChatContentPublisher.Core.ContentPublishing.PublishTask.Services;
 using VRChatContentPublisher.Core.Events.PublishTask;
@@ -175,7 +176,7 @@ public sealed class ContentPublishTaskService
                 if (State.CurrentStage == PublishTaskStage.ContentPublishing)
                 {
                     if (!_contentPublisher.CanPublish())
-                        throw new InvalidOperationException("Account session expired or invalid.");
+                        throw new PublishingCanceledDueToSessionInvalidException(null);
 
                     using (CoreActivitySources.ContentPublishing.StartActivity("ContentPublishing")?
                                .SetContentMetadata(
@@ -199,11 +200,24 @@ public sealed class ContentPublishTaskService
                 UpdateProgress("Content Published", 1, ContentPublishTaskStatus.Completed);
                 LastError = null;
             }
-            catch (OperationCanceledException ex) when (_cancellationTokenSource.IsCancellationRequested)
+            catch (PublishingCanceledDueToSessionInvalidException ex)
             {
-                _logger.LogError(ex, "Publish task for content {ContentId} was cancelled.", State.ContentId);
+                _logger.LogWarning(
+                    ex, "Publish task for content {ContentId} was cancelled due to session invalid", State.ContentId);
+                activity?.AddEvent(new ActivityEvent("TaskCancelledDueToSessionInvalid"));
+
+                LastError = ex;
+                State.ErrorMessage = ex.Message;
+                UpdateProgress("Task was cancelled due to session invalid.", 1, ContentPublishTaskStatus.Canceled);
+            }
+            catch (PublishTaskCanceledException canceledException)
+            {
+                _logger.LogInformation(
+                    canceledException, "Publish task for content {ContentId} was cancelled", State.ContentId);
                 activity?.AddEvent(new ActivityEvent("TaskCancelled"));
 
+                LastError = canceledException;
+                State.ErrorMessage = canceledException.Message;
                 UpdateProgress("Task was cancelled.", 1, ContentPublishTaskStatus.Canceled);
             }
             catch (Exception ex)
@@ -255,12 +269,22 @@ public sealed class ContentPublishTaskService
                     _ => new BundleProcessOptions(State.ContentId, [])
                 };
 
-                await _bundleProcessService.ProcessBundleAsync(
-                    rawBundleStream,
-                    outputBundleFileStream,
-                    processOptions,
-                    progressReporter,
-                    cancellationToken);
+                try
+                {
+                    await _bundleProcessService.ProcessBundleAsync(
+                        rawBundleStream,
+                        outputBundleFileStream,
+                        processOptions,
+                        progressReporter,
+                        cancellationToken);
+                }
+                catch (OperationCanceledException canceledException)
+                    when (canceledException.CancellationToken == cancellationToken)
+                {
+                    throw new PublishTaskCanceledException(
+                        new BundleProcessingCanceledException(canceledException)
+                    );
+                }
 
                 await _fileService.MarkFileReadyAsync(outputBundleFile.FileId);
                 State.BundleFileId = outputBundleFile.FileId;
@@ -293,9 +317,16 @@ public sealed class ContentPublishTaskService
                    "Publish content ({ContentId}) {ContentPlatform} {ContentName} took {ElapsedMilliseconds} ms",
                    State.ContentId, State.ContentPlatform, State.ContentName, watch.ElapsedMilliseconds)))
         {
-            await _contentPublisher.PublishAsync(
-                State.BundleFileId, State.ThumbnailFileId, State.Description, State.Tags, State.ReleaseStatus,
-                _progressReporter, cancellationToken);
+            try
+            {
+                await _contentPublisher.PublishAsync(
+                    State.BundleFileId, State.ThumbnailFileId, State.Description, State.Tags, State.ReleaseStatus,
+                    _progressReporter, cancellationToken);
+            }
+            catch (PublishingCanceledException canceledException)
+            {
+                throw new PublishTaskCanceledException(canceledException);
+            }
         }
 
         await _fileService.DeleteFileAsync(State.BundleFileId);
