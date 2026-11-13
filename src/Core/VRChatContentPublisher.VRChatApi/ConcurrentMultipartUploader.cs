@@ -135,7 +135,7 @@ public sealed class ConcurrentMultipartUploader(
                         {
                             await UploadChunkAsync(currentPartNumber, buffer, bytesRead, uploadCancellationToken);
                         }
-                        catch (OperationCanceledException) when (uploadCancellationToken.IsCancellationRequested)
+                        catch (OperationCanceledException ex) when (ex.CancellationToken == uploadCancellationToken)
                         {
                             // Aborted because another chunk failed (or because the caller canceled the upload).
                             // Not a failure of this chunk, so it is not remembered as the abort reason.
@@ -164,11 +164,15 @@ public sealed class ConcurrentMultipartUploader(
                 // chunks have been aborted and their tasks complete as canceled.
                 await Task.WhenAll(uploadTasks);
             }
-            catch (OperationCanceledException ex) when (cancellationToken.IsCancellationRequested)
+            catch (OperationCanceledException ex) when (ex.CancellationToken == uploadCancellationToken)
             {
-                logger.LogWarning(ex, "Upload for file {FileId} version {FileVersion} was canceled", fileId,
+                logger.LogInformation(ex, "Upload for file {FileId} version {FileVersion} was canceled", fileId,
                     fileVersion);
-                throw;
+                throw new OperationCanceledException(
+                    "Concurrent multipart upload was canceled.",
+                    ex,
+                    cancellationToken
+                );
             }
             catch (Exception ex)
             {
@@ -231,7 +235,8 @@ public sealed class ConcurrentMultipartUploader(
                 var retryPipeline = CreateRetryPipeline(partNumber);
                 var finalResponse = await retryPipeline.ExecuteAsync(async innerCt =>
                 {
-                    using var attemptActivity = VRChatApiCoreActivitySources.VRChatApi.StartActivity("UploadChunkAttempt");
+                    using var attemptActivity =
+                        VRChatApiCoreActivitySources.VRChatApi.StartActivity("UploadChunkAttempt");
 
                     try
                     {
