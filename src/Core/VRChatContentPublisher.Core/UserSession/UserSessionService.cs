@@ -255,17 +255,22 @@ public sealed class UserSessionService : IAsyncDisposable, IDisposable
 
     #endregion
 
-    private void OnStateChanged(UserSessionState e)
+    private void OnStateChanged(UserSessionState newState)
     {
-        if (e == State)
+        if (newState == State)
             return;
 
         var oldState = State;
 
-        State = e;
-        StateChanged?.Invoke(this, e);
+        State = newState;
+        StateChanged?.Invoke(this, newState);
 
-        _sessionStateChangedPublisher.Publish(new SessionStateChangedEvent(UserId, UserNameOrEmail, e, oldState));
+        _sessionStateChangedPublisher.Publish(new SessionStateChangedEvent(
+            UserId,
+            CurrentUser?.DisplayName,
+            UserNameOrEmail,
+            newState,
+            oldState));
     }
 }
 

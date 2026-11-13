@@ -32,16 +32,16 @@ public sealed partial class NotificationSettingsViewModel(
         }
     }
 
-    public bool SendNotificationOnStartupSessionRestoreFailed
+    public bool SendNotificationOnSessionInvalid
     {
-        get => appSettings.Value.SendNotificationOnStartupSessionRestoreFailed;
+        get => appSettings.Value.SendNotificationOnSessionInvalid;
         set
         {
-            if (appSettings.Value.SendNotificationOnStartupSessionRestoreFailed == value)
+            if (appSettings.Value.SendNotificationOnSessionInvalid == value)
                 return;
 
             OnPropertyChanging();
-            appSettings.Update(settings => settings.SendNotificationOnStartupSessionRestoreFailed = value);
+            appSettings.Update(settings => settings.SendNotificationOnSessionInvalid = value);
             OnPropertyChanged();
         }
     }

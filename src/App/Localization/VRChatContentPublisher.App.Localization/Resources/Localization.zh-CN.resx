@@ -219,8 +219,8 @@
     <data name="Pages_Settings_Notification_Send_Notifications_When_Title" xml:space="preserve">
         <value>发生以下情况时发送通知</value>
     </data>
-    <data name="Pages_Settings_Notification_Send_Notifications_When_Account_Session_Expired_On_Startup" xml:space="preserve">
-        <value>App 启动时账号会话过期</value>
+    <data name="Pages_Settings_Notification_Send_Notifications_When_Session_Invalid" xml:space="preserve">
+        <value>账号登录过期</value>
     </data>
     <data name="Pages_Settings_Notification_Send_Notifications_When_Publish_Task_Failed" xml:space="preserve">
         <value>内容发布任务发生错误</value>
@@ -720,7 +720,10 @@ VRChat Content Publisher 不会阻止你尝试使用这个账号发布内容，�
         <value>无法恢复 {0} 的会话，请报告该问题</value>
     </data>
     <data name="Notifications_Session_Expired_Or_Invalid_Title_Template" xml:space="preserve">
-        <value>{0} 的会话已过期或无效</value>
+        <value>账号 {0} 的登录已失效</value>
+    </data>
+    <data name="Notifications_Session_Expired_Or_Invalid_Description" xml:space="preserve">
+        <value>正在发布阶段的任务已被取消，请在重新登录账号后重试。</value>
     </data>
     <data name="Notifications_First_Time_Hide_Window_Tip_Title" xml:space="preserve">
         <value>应用隐藏到系统托盘了！</value>

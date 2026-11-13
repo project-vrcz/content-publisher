@@ -679,6 +679,15 @@ namespace VRChatContentPublisher.App.Localization.Resources {
         }
         
         /// <summary>
+        ///     Looks up a localized string similar to All tasks in publish stage are cancelled, please retry after repair account..
+        /// </summary>
+        internal static string Notifications_Session_Expired_Or_Invalid_Description {
+            get {
+                return ResourceManager.GetString("Notifications_Session_Expired_Or_Invalid_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///     Looks up a localized string similar to Session expired or invalid for user {0}.
         /// </summary>
         internal static string Notifications_Session_Expired_Or_Invalid_Title_Template {
@@ -1959,16 +1968,6 @@ namespace VRChatContentPublisher.App.Localization.Resources {
         }
         
         /// <summary>
-        ///     Looks up a localized string similar to Account Session Expired on Startup.
-        /// </summary>
-        internal static string Pages_Settings_Notification_Send_Notifications_When_Account_Session_Expired_On_Startup {
-            get {
-                return ResourceManager.GetString(("Pages_Settings_Notification_Send_Notifications_When_Account_Session_Expired_On_St" +
-                        "artup"), resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///     Looks up a localized string similar to New Pairing Request.
         /// </summary>
         internal static string Pages_Settings_Notification_Send_Notifications_When_New_Pairing_Request {
@@ -2001,6 +2000,15 @@ namespace VRChatContentPublisher.App.Localization.Resources {
         internal static string Pages_Settings_Notification_Send_Notifications_When_Publish_Task_Succeeded {
             get {
                 return ResourceManager.GetString("Pages_Settings_Notification_Send_Notifications_When_Publish_Task_Succeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///     Looks up a localized string similar to Account Session Expired.
+        /// </summary>
+        internal static string Pages_Settings_Notification_Send_Notifications_When_Session_Invalid {
+            get {
+                return ResourceManager.GetString("Pages_Settings_Notification_Send_Notifications_When_Session_Invalid", resourceCulture);
             }
         }
         

@@ -226,9 +226,8 @@
     <data name="Pages_Settings_Notification_Send_Notifications_When_Title" xml:space="preserve">
         <value>Send notifications when</value>
     </data>
-    <data name="Pages_Settings_Notification_Send_Notifications_When_Account_Session_Expired_On_Startup"
-          xml:space="preserve">
-        <value>Account Session Expired on Startup</value>
+    <data name="Pages_Settings_Notification_Send_Notifications_When_Session_Invalid" xml:space="preserve">
+        <value>Account Session Expired</value>
     </data>
     <data name="Pages_Settings_Notification_Send_Notifications_When_Publish_Task_Failed" xml:space="preserve">
         <value>Publish Task Failed</value>
@@ -729,6 +728,9 @@ Please check whether a VPM package manager (such as ALCOM / VRChat Creator Compa
     </data>
     <data name="Notifications_Session_Expired_Or_Invalid_Title_Template" xml:space="preserve">
         <value>Session expired or invalid for user {0}</value>
+    </data>
+    <data name="Notifications_Session_Expired_Or_Invalid_Description" xml:space="preserve">
+        <value>All tasks in publish stage are cancelled, please retry after repair account.</value>
     </data>
     <data name="Notifications_First_Time_Hide_Window_Tip_Title" xml:space="preserve">
         <value>The app has minimized to the system tray!</value>
